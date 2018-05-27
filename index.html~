@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+  <body>
+
+    <svg id="svg" xmlns="http://www.w3.org/2000/svg" height="500" width="500" style="border: solid; border-width: 1px;">
+    </svg>
+    <br>
+    
+    <button id="clear">clear</button> 
+    
+    <script src="js.js"></script>
+  </body>
+</html>
