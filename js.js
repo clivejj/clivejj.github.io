@@ -86,13 +86,18 @@ var drawCircle = function(circle) {
 var animate = function(){
     console.log(elements);
     console.log("animating");
-    var i = 0;
+    /*var i = 0;
     console.log(svg.children);
     var max = svg.childElementCount - 1;
     while (i < max) {
 	svg.removeChild(svg.children[0]);
 	i++;
     }
+    */
+    svg.innerHTML = "";
+    if (lastCircleData != null) {
+	lastCircleDrawn = drawCircle(lastCircleData);
+    } 
     updateCircles();
     for (var i = 0; i < elements.length; i++) {
 	var circle = elements[i];
@@ -142,7 +147,7 @@ var updateCharge = function(e) {
 var assignCharge = function(e) {
     newCircleAllowed = true;
     lastCircleData = null;
-    lastCircleData = null;
+    lastCircleDrawn = null;
     textbox.style.visibility = "hidden";
     submit.style.visibility = "hidden";
     
