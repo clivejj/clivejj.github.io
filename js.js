@@ -68,17 +68,23 @@ var updateCircles = function() {
 var calcA = function(circle) {
     var sumAX = 0;
     var sumAY = 0;
+    console.log("circles creating the force");
     for (var i = 0; i < elements.length; i++) {
 	var otherCircle = elements[i];
 	if ((otherCircle != lastCircleData) && (otherCircle != circle)) {
-	    var d2 = (Math.pow((circle.x - otherCircle.x), 2) + Math.pow((circle.y - otherCircle.y), 2));
-	    var angle = Math.atan((circle.y - otherCircle.y) / (circle.x - otherCircle.x));
-	    var q = otherCircle.q
-	    sumAX += q * Math.cos(angle) / d2
-	    sumAY += q * Math.sin(angle) / d2
+	    //console.log(otherCircle);
+	    var r = Math.pow((Math.pow((circle.x - otherCircle.x), 2) + Math.pow((circle.y - otherCircle.y), 2)), 0.5);
+	    //console.log("r: " + r);
+	    //var angle = (circle.y - otherCircle.y) / (circle.x - otherCircle.x)
+	    var otherQ = otherCircle.q;
+	    var q = circle.q;
+	    //console.log("dx: " + (circle.x - otherCircle.x));
+	    //console.log("qq: " + (q * otherQ));
+	    sumAX += (otherCircle.q / r) * (circle.x - otherCircle.x);
+	    sumAY += (otherCircle.q / r) * (circle.y - otherCircle.y);
 	}
     }
-    var result = [sumAX * circle.q, sumAY * circle.q];
+    var result = [sumAX * q, sumAY * q];
     console.log(result);
     return(result);
     //return [.01, .01];
@@ -139,12 +145,15 @@ var end = function(e) {
     move = false;
     start.innerHTML = "start";
     newCircleAllowed = true;
+    textbox.style.visibility = "hidden";
+    textbox.value = 50;
+    submit.style.visibility = "hidden";
 }
 
 var action = function(e) {
     if (!(move)) {
 	start.innerHTML = "pause";
-	requestId = setInterval(animate, 10);
+	requestId = setInterval(animate, 20);
 	move = true;
     }
     else {
