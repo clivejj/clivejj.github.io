@@ -1,1 +1,1 @@
-# electro_stimulation
+# N-Body Electromagnetic Force Problem
