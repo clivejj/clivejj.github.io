@@ -10,6 +10,7 @@ var move = false;
 var lastCircleData = null;
 var lastCircleDrawn = null;
 var newCircleAllowed = true;
+var text = document.getElementById("text")
 
 //svg.setAttribute("width", window.innerWidth);
 //svg.setAttribute("height", window.innerHeight);
@@ -25,6 +26,7 @@ submit.style.visibility = "hidden";
 
 
 var newCircle = function(e) {
+    text.style.visibility = "hidden";
     if (!(newCircleAllowed)) {
 	return;
     }
@@ -49,7 +51,7 @@ var newCircle = function(e) {
 var checkEnd = function() {
     for (var i = 0; i < elements.length; i++) {
 	var circle = elements[i];
-	if ((circle.x > 0) && (circle.x < (width + 30)) && (circle.y > 0) && (circle.y < (height + 30))) {
+	if ((circle.x > -30) && (circle.x < (width + 30)) && (circle.y > -30) && (circle.y < (height + 30))) {
 	    return false
 	}
     }
@@ -91,17 +93,6 @@ var updateCircles = function() {
     if (elements.length == 0) {
 	svg.innerHTML = "";
     }
-    if (elements.length == 0) {
-	end()
-	window.alert("There are no more charges!");
-	return;
-    }
-    if (checkEnd()) {
-	svg.innerHTML = "";
-	window.alert("All of the charges are off of the screen!");
-	end();
-	return;
-    }	    
 }
 
 
@@ -132,7 +123,7 @@ var calcA = function(circle) {
     }
     console.log(sumAX);
     console.log(sumAY);
-    var result = [sumAX * 10, sumAY * 10];;
+    var result = [sumAX * 20, sumAY * 20];;
     console.log(result);
     return(result);
     //return [.01, .01];
@@ -174,6 +165,18 @@ var animate = function(){
       }
     */
     svg.innerHTML = "";
+      if (elements.length == 0) {
+	  end()
+	  svg.innerHTML = "";
+	window.alert("Collision! There are no more charges!");
+	return;
+    }
+    if (checkEnd()) {
+	svg.innerHTML = "";
+	window.alert("All of the charges are off of the screen!");
+	end();
+	return;
+    }	    
     if (lastCircleData != null) {
 	lastCircleDrawn = drawCircle(lastCircleData);
     } 
