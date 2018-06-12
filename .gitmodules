@@ -1,0 +1,3 @@
+[submodule "ElectricFeel"]
+	path = ElectricFeel
+	url = https://github.com/clivejj/electro_stimulation.git
